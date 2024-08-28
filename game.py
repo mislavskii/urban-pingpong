@@ -1,9 +1,14 @@
+# https://api.arcade.academy/en/latest/index.html
+
 import arcade
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = 'Ping Pong Game'
 
+
+# TODO:
+# - Make the ball fall off if not intercepted and reseeded
 
 class Bar(arcade.Sprite):
     def __init__(self):
