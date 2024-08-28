@@ -51,9 +51,9 @@ class Game(arcade.Window):
         self.ball.draw()
 
     def update(self, delta_time: float):
-        if (abs(self.ball.center_x - self.bar.center_x) < self.bar.width / 3 - 22
-          ) and (self.ball.center_y < self.bar.top - 10
-          ) and self.ball.change_y < 0:
+        # if arcade.check_for_collision(self.ball, self.bar) and self.ball.change_y < 0:
+        #     self.ball.change_y *= -1
+        if self.ball_intercepted():
             self.ball.change_y *= -1
         self.ball.update()
         self.bar.update()
@@ -67,6 +67,15 @@ class Game(arcade.Window):
     def on_key_release(self, key: int, modifiers: int):
         if key in (arcade.key.RIGHT, arcade.key.LEFT):
             self.bar.change_x = 0
+
+    def ball_intercepted(self):
+        width_factor = 3
+        left_shift = 22
+        top_shift = 10
+        if (abs(self.ball.center_x - self.bar.center_x) < self.bar.width / width_factor - left_shift
+        ) and (self.ball.center_y < self.bar.top - top_shift
+        ) and self.ball.change_y < 0:
+            return True
 
 
 if __name__ == '__main__':
